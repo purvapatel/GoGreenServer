@@ -9,9 +9,9 @@ app.use(bodyParser.json());
 
 
 //get user details
-app.get('/userlist/:password/:emailid', function (req, res) {
+app.get('/userlist/:email/:password', function (req, res) {
   console.log('I received a GET request');
-  db.userlist.find({"password":req.params.password, "emailid":req.params.emailid}, function (err, docs) {
+  db.userlist.find({"email":req.params.email, "password":req.params.password}, function (err, docs) {
     console.log(docs);
     res.json(docs);
   });
