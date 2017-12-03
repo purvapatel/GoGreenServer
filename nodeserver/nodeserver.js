@@ -108,7 +108,7 @@ app.delete('/userlist/:id', function (req, res) {
 //update service list by ID
 app.put('/servicelist/:id', function (req, res) {
   console.log(req.body);
-  db.servicelist.update({"_id" : new ObjectId(req.params.id)}, {"name" : req.params.name , "location": req.params.location, "rate": req.params.rate }, function(err, doc) {
+  db.servicelist.update({"_id" : new ObjectId(req.params.id)}, {"name" : req.body.name , "location": req.body.location, "rate": req.body.rate, "supplier_name": req.body.supplier_name, "supplier_id": req.body.supplier_id }, function(err, doc) {
     res.json({"success" : "1"});
   });
 });
