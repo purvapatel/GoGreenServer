@@ -63,9 +63,9 @@ app.post('/userlist', function (req, res) {
 });
 
 //delete user details
-app.delete('/userlist/:name', function (req, res) {
+app.delete('/userlist/:id', function (req, res) {
   console.log(req.body);
-  db.userlist.remove({name: req.params.name}, function(err, doc) {
+  db.userlist.remove({"_id" : new ObjectId(req.params.id)}, function(err, doc) {
     res.json({"success" : "1"});
   });
 });
