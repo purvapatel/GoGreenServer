@@ -63,7 +63,7 @@ app.post('/userlist', function (req, res) {
   });
 });
 
-//insert user details
+//insert service details
 app.post('/servicelist', function (req, res) {
   console.log(req.body);
   db.servicelist.insert(req.body, function(err, doc) {
@@ -71,7 +71,7 @@ app.post('/servicelist', function (req, res) {
   });
 });
 
-//get service details for user display using name
+//get service details for user display using id
 app.get('/servicedetails/:id', function (req, res) {
   console.log('I received a GET request');
   db.servicelist.find({"_id" : new ObjectId(req.params.id)}, function (err, docs) {
@@ -80,7 +80,7 @@ app.get('/servicedetails/:id', function (req, res) {
   });
 });
 
-//get service details by service_id
+//get service details by supplier_name
 app.get('/servicelist/:name', function (req, res) {
   console.log('I received a GET request');
   db.servicelist.find({"supplier_name":req.params.name}, function (err, docs) {
@@ -101,6 +101,14 @@ app.delete('/servicelist/:id', function (req, res) {
 app.delete('/userlist/:id', function (req, res) {
   console.log(req.body);
   db.userlist.remove({"_id" : new ObjectId(req.params.id)}, function(err, doc) {
+    res.json({"success" : "1"});
+  });
+});
+
+//update service list by ID
+app.put('/servicelist/:id', function (req, res) {
+  console.log(req.body);
+  db.servicelist.update({"_id" : new ObjectId(req.params.id)}, {"name" : req.params.name , "location": req.params.location, "rate": req.params.rate }, function(err, doc) {
     res.json({"success" : "1"});
   });
 });
