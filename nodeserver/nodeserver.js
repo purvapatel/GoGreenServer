@@ -3,6 +3,7 @@ var app = express();
 var mongojs = require('mongojs');
 var db = mongojs('user:user@ds127436.mlab.com:27436/gogreendatabase',['userlist']);
 var bodyParser = require('body-parser');
+var ObjectId = require('mongodb').ObjectID;
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
@@ -26,7 +27,16 @@ app.get('/userlist/:email/:password', function (req, res) {
   });
 });
 
-//get user details for user display
+//get user details for user display using ID
+app.get('/userDetail/:id', function (req, res) {
+  console.log('I received a GET request');
+  db.userlist.find({"_id" : new ObjectId(req.params.id)},{"name" : 1,"email" : 1, "mobile" : 1}, function (err, docs) {
+    console.log(docs);
+    res.json(docs);
+  });
+});
+
+//get user details for user display using name
 app.get('/userlist/:name', function (req, res) {
   console.log('I received a GET request');
   db.userlist.find({"name":req.params.name},{"name" : 1,"email" : 1, "mobile" : 1}, function (err, docs) {
@@ -38,7 +48,7 @@ app.get('/userlist/:name', function (req, res) {
 //get user list with name and id
 app.get('/userlist', function (req, res) {
   console.log('I received a GET request');
-  db.userlist.find({},{"name" : 1,"_id" : 1}, function (err, docs) {
+  db.userlist.find({"type" : "User"},{"name" : 1,"_id" : 1}, function (err, docs) {
     console.log(docs);
     res.json(docs);
   });
