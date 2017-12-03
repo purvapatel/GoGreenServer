@@ -131,6 +131,13 @@ app.get('/servicelist', function (req, res) {
   });
 });
 
+//insert user_service details when user wants to buy any service
+app.post('/addUserServiceList', function (req, res) {
+  console.log(req.body);
+  db.userservicelist.insert(req.body, function(err, doc) {
+    res.json({"success" : "1"});
+  });
+});
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
