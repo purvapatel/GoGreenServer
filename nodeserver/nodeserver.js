@@ -72,6 +72,15 @@ app.post('/servicelist', function (req, res) {
 });
 
 //get service details for user display using name
+app.get('/servicedetails/:id', function (req, res) {
+  console.log('I received a GET request');
+  db.servicelist.find({"_id" : new ObjectId(req.params.id)}, function (err, docs) {
+    console.log(docs);
+    res.json(docs);
+  });
+});
+
+//get service details by service_id
 app.get('/servicelist/:name', function (req, res) {
   console.log('I received a GET request');
   db.servicelist.find({"supplier_name":req.params.name}, function (err, docs) {
