@@ -71,10 +71,10 @@ app.post('/servicelist', function (req, res) {
   });
 });
 
-//get user details for user display using name
-app.get('/servicelist/:id', function (req, res) {
+//get service details for user display using name
+app.get('/servicelist/:name', function (req, res) {
   console.log('I received a GET request');
-  db.userlist.find({"name":req.params.name},{"name" : 1,"email" : 1, "mobile" : 1}, function (err, docs) {
+  db.servicelist.find({"supplier_name":req.params.name}, function (err, docs) {
     console.log(docs);
     res.json(docs);
   });
