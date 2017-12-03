@@ -52,7 +52,7 @@ app.post('/userlist', function (req, res) {
   });
 });
 
-//insert user details
+//delete user details
 app.delete('/userlist/:name', function (req, res) {
   console.log(req.body);
   db.userlist.remove({name: req.params.name}, function(err, doc) {
