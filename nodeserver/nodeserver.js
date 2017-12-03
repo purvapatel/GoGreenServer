@@ -89,6 +89,14 @@ app.get('/servicelist/:name', function (req, res) {
   });
 });
 
+//delete service detail by _id
+app.delete('/servicelist/:id', function (req, res) {
+  console.log(req.body);
+  db.servicelist.remove({"_id" : new ObjectId(req.params.id)}, function(err, doc) {
+    res.json({"success" : "1"});
+  });
+});
+
 //delete user details
 app.delete('/userlist/:id', function (req, res) {
   console.log(req.body);
