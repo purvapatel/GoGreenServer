@@ -65,7 +65,7 @@ app.post('/userlist', function (req, res) {
 //insert user details
 app.post('/servicelist', function (req, res) {
   console.log(req.body);
-  db.userlist.insert(req.body, function(err, doc) {
+  db.servicelist.insert(req.body, function(err, doc) {
     res.json({"success" : "1"});
   });
 });
