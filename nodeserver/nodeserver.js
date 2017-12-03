@@ -58,7 +58,8 @@ app.get('/userlist', function (req, res) {
 app.post('/userlist', function (req, res) {
   console.log(req.body);
   db.userlist.insert(req.body, function(err, doc) {
-    res.json({"success" : "1"});
+    console.log(doc._id);
+    res.json({"success" : "1" ,"id" : doc._id});
   });
 });
 
@@ -67,6 +68,15 @@ app.post('/servicelist', function (req, res) {
   console.log(req.body);
   db.servicelist.insert(req.body, function(err, doc) {
     res.json({"success" : "1"});
+  });
+});
+
+//get user details for user display using name
+app.get('/servicelist/:id', function (req, res) {
+  console.log('I received a GET request');
+  db.userlist.find({"name":req.params.name},{"name" : 1,"email" : 1, "mobile" : 1}, function (err, docs) {
+    console.log(docs);
+    res.json(docs);
   });
 });
 
