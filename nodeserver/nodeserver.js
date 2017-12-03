@@ -113,6 +113,24 @@ app.put('/servicelist/:id', function (req, res) {
   });
 });
 
+//get supplier list for customers
+app.get('/supplierlist', function (req, res) {
+  console.log('I received a GET request');
+  db.userlist.find({"type" : "Supplier"}, function (err, docs) {
+    console.log(docs);
+    res.json(docs);
+  });
+});
+
+//list of all services for customer
+app.get('/servicelist', function (req, res) {
+  console.log('I received a GET request');
+  db.servicelist.find({}, function (err, docs) {
+    console.log(docs);
+    res.json(docs);
+  });
+});
+
 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
