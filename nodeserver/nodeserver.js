@@ -151,7 +151,7 @@ app.get('/findServiceByUserName/:name', function (req, res) {
 //update service state in userservicelist
 app.put('/updatestate/:id/:name', function (req, res) {
   console.log(req.body);
-  db.userservicelist.update({"service_id" : req.params.id , "user_name" : req.params.name }, {"switch" : req.body.switch}, function(err, doc) {
+  db.userservicelist.update({"service_id" : req.params.id , "user_name" : req.params.name },{ "$set": {"switch" : req.body.switch}}, function(err, doc) {
     res.json({"success" : "1"});
   });
 });
