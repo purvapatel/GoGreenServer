@@ -148,6 +148,14 @@ app.get('/findServiceByUserName/:name', function (req, res) {
   });
 });
 
+//update service state in userservicelist
+app.put('/updatestate/:id', function (req, res) {
+  console.log(req.body);
+  db.userservicelist.update({"_id" : new ObjectId(req.params.id)}, {"switch" : req.body.switch}, function(err, doc) {
+    res.json({"success" : "1"});
+  });
+});
+
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
