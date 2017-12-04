@@ -139,6 +139,15 @@ app.post('/addUserServiceList', function (req, res) {
   });
 });
 
+// get user specific services (my services)
+app.get('/findServiceByUserName/:name', function (req, res) {
+  console.log('I received a GET request');
+  db.userservicelist.find({"user_name":req.params.name}, function (err, docs) {
+    console.log(docs);
+    res.json(docs);
+  });
+});
+
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
